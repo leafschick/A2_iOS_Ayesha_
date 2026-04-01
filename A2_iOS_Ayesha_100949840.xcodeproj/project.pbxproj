@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7D22A2C42F7D726700D966A7 /* Product+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D22A2C32F7D726300D966A7 /* Product+CoreDataClass.swift */; };
+		7D22A2C62F7D727800D966A7 /* Product+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D22A2C52F7D727500D966A7 /* Product+CoreDataProperties.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		7D22A2AC2F7D692600D966A7 /* A2_iOS_Ayesha_100949840.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = A2_iOS_Ayesha_100949840.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D22A2C32F7D726300D966A7 /* Product+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Product+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7D22A2C52F7D727500D966A7 /* Product+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Product+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +39,8 @@
 		7D22A2A32F7D692600D966A7 = {
 			isa = PBXGroup;
 			children = (
+				7D22A2C52F7D727500D966A7 /* Product+CoreDataProperties.swift */,
+				7D22A2C32F7D726300D966A7 /* Product+CoreDataClass.swift */,
 				7D22A2AE2F7D692600D966A7 /* A2_iOS_Ayesha_100949840 */,
 				7D22A2AD2F7D692600D966A7 /* Products */,
 			);
@@ -119,6 +128,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D22A2C62F7D727800D966A7 /* Product+CoreDataProperties.swift in Sources */,
+				7D22A2C42F7D726700D966A7 /* Product+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
