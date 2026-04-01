@@ -38,62 +38,67 @@ struct ContentView: View {
                 Divider()
                     .padding(.horizontal)
                 
-                // 👇 MOVED PRODUCT SECTION UP
                 if products.indices.contains(currentIndex) {
                     let product = products[currentIndex]
                     
-                    Text(product.productName ?? "No Name")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    
-                    Text(product.productDescription ?? "No Description")
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                    
-                    Text("Price: $\(product.productPrice, specifier: "%.2f")")
-                        .font(.headline)
-                    
-                    Text("Provider: \(product.productProvider ?? "No Provider")")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                    
-                    HStack {
-                        Button(action: {
-                            if currentIndex > 0 {
-                                currentIndex -= 1
-                            }
-                        }) {
-                            Text("Previous")
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                                .padding(.horizontal, 18)
-                                .padding(.vertical, 8)
-                                .background(Color.gray.opacity(0.15))
-                                .clipShape(Capsule())
-                        }
-                        .foregroundColor(currentIndex > 0 ? .black : .gray)
-                        .disabled(currentIndex == 0)
+                    VStack(spacing: 12) {
                         
-                        Spacer()
+                        Text(product.productName ?? "No Name")
+                            .font(.title2)
+                            .fontWeight(.semibold)
                         
-                        Button(action: {
-                            if currentIndex < products.count - 1 {
-                                currentIndex += 1
+                        Text(product.productDescription ?? "No Description")
+                            .multilineTextAlignment(.center)
+                        
+                        Text("Price: $\(product.productPrice, specifier: "%.2f")")
+                            .font(.headline)
+                        
+                        Text("Provider: \(product.productProvider ?? "No Provider")")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                        
+                        HStack {
+                            Button(action: {
+                                if currentIndex > 0 {
+                                    currentIndex -= 1
+                                }
+                            }) {
+                                Text("Previous")
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                    .padding(.horizontal, 18)
+                                    .padding(.vertical, 8)
+                                    .background(Color.gray.opacity(0.15))
+                                    .clipShape(Capsule())
                             }
-                        }) {
-                            Text("Next")
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                                .padding(.horizontal, 18)
-                                .padding(.vertical, 8)
-                                .background(Color.blue.opacity(0.2))
-                                .clipShape(Capsule())
+                            .foregroundColor(currentIndex > 0 ? .black : .gray)
+                            .disabled(currentIndex == 0)
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                if currentIndex < products.count - 1 {
+                                    currentIndex += 1
+                                }
+                            }) {
+                                Text("Next")
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                    .padding(.horizontal, 18)
+                                    .padding(.vertical, 8)
+                                    .background(Color.blue.opacity(0.2))
+                                    .clipShape(Capsule())
+                            }
+                            .foregroundColor(currentIndex < products.count - 1 ? .green : .gray)
+                            .disabled(currentIndex >= products.count - 1)
                         }
-                        .foregroundColor(currentIndex < products.count - 1 ? .green : .gray)
-                        .disabled(currentIndex >= products.count - 1)
+                        
+                        .padding(.top, 10)
                     }
-                    .padding(.horizontal, 30)
-                    .padding(.top, 25)
+                    .padding()
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(15)
+                    .padding(.horizontal)
                     
                 } else {
                     Text("No products available.")
@@ -101,7 +106,6 @@ struct ContentView: View {
                         .foregroundColor(.red)
                 }
                 
-                // 👇 BUTTONS NOW BELOW PRODUCT
                 NavigationLink(destination: AllProductsView()) {
                     Text("View All Products")
                         .fontWeight(.semibold)
