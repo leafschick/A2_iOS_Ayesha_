@@ -22,7 +22,8 @@ struct AllProductsView: View {
             return Array(products)
         } else {
             return products.filter {
-                ($0.productName ?? "").localizedCaseInsensitiveContains(searchText)
+                ($0.productName ?? "").localizedCaseInsensitiveContains(searchText) ||
+                ($0.productDescription ?? "").localizedCaseInsensitiveContains(searchText)
             }
         }
     }
