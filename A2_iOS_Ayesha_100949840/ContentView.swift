@@ -130,6 +130,12 @@ struct ContentView: View {
                 }
                 .padding(.horizontal)
                 
+                Text("© 2026 Ayesha Akbar")
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+                    .padding(.top, 10)
+
+                
                 Spacer()
             }
             .navigationBarHidden(true)
