@@ -11,10 +11,10 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-       @FetchRequest(
-           entity: Product.entity(),
-           sortDescriptors: [NSSortDescriptor(key: "productId", ascending: true)]
-       ) private var products: FetchedResults<Product>
+    @FetchRequest(
+        entity: Product.entity(),
+        sortDescriptors: [NSSortDescriptor(key: "productId", ascending: true)]
+    ) private var products: FetchedResults<Product>
     
     @State private var currentIndex: Int = 0
     
@@ -23,52 +23,28 @@ struct ContentView: View {
             VStack(spacing: 20) {
                 
                 Spacer().frame(height: 30)
+                
                 Text("Starbucks")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .font(Font.largeTitle.weight(.bold))
                     .foregroundColor(.black)
-                    
                 
-                
-
                 Text("This is an instore app for Starbucks managers to view products and add more products.")
                     .font(.subheadline)
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                 
-                NavigationLink(destination: AllProductsView()) {
-                    Text("View All Products")
-                        .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .padding(.horizontal)
-                
-                NavigationLink(destination: AddProductView()) {
-                    Text("Add Product")
-                        .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .padding(.horizontal)
-                
                 Divider()
                     .padding(.horizontal)
                 
+                // 👇 MOVED PRODUCT SECTION UP
                 if products.indices.contains(currentIndex) {
                     let product = products[currentIndex]
-                    Text (product.productName ?? "No Name")
+                    
+                    Text(product.productName ?? "No Name")
                         .font(.title2)
                         .fontWeight(.semibold)
-                
                     
                     Text(product.productDescription ?? "No Description")
                         .multilineTextAlignment(.center)
@@ -82,8 +58,6 @@ struct ContentView: View {
                         .foregroundColor(.gray)
                     
                     HStack {
-                        
-                        // PREVIOUS
                         Button(action: {
                             if currentIndex > 0 {
                                 currentIndex -= 1
@@ -99,10 +73,9 @@ struct ContentView: View {
                         }
                         .foregroundColor(currentIndex > 0 ? .black : .gray)
                         .disabled(currentIndex == 0)
-
-                        Spacer().frame(height:30)
-
-                        // NEXT
+                        
+                        Spacer()
+                        
                         Button(action: {
                             if currentIndex < products.count - 1 {
                                 currentIndex += 1
@@ -127,21 +100,49 @@ struct ContentView: View {
                         .font(.headline)
                         .foregroundColor(.red)
                 }
-                    Spacer()
-            }
-                        .navigationBarHidden(true)
-                        .onAppear {
-                            refreshCurrentIndex()
-                        }
-                        .onChange(of: products.count) {
-                            if !products.isEmpty {
-                                currentIndex = products.count - 1
-                            } else {
-                                currentIndex = 0
-                            }
-                        }
-                    }
+                
+                // 👇 BUTTONS NOW BELOW PRODUCT
+                NavigationLink(destination: AllProductsView()) {
+                    Text("View All Products")
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
                 }
+                .padding(.horizontal)
+                
+                NavigationLink(destination: AddProductView()) {
+                    Text("Add Product")
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding(.horizontal)
+                
+                Spacer()
+            }
+            .navigationBarHidden(true)
+            .onAppear {
+                if !products.isEmpty {
+                    currentIndex = products.count - 1
+                } else {
+                    currentIndex = 0
+                }
+            }
+            .onChange(of: products.count) {
+                if !products.isEmpty {
+                    currentIndex = products.count - 1
+                } else {
+                    currentIndex = 0
+                }
+            }
+        }
+    }
     
     private func refreshCurrentIndex() {
         if products.isEmpty {
@@ -154,5 +155,4 @@ struct ContentView: View {
 
 #Preview {
     ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-
 }
