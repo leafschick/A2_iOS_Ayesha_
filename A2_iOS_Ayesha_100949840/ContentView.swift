@@ -36,6 +36,17 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                 
+                NavigationLink(destination: AllProductsView()) {
+                    Text("View All Products")
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding(.horizontal)
+                
                 Divider()
                     .padding(.horizontal)
                 
